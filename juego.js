@@ -3,7 +3,7 @@ document.addEventListener("keydown",function(evento){
     if(evento.keyCode==32){
         console.log("Salta");
         if (nivel.muerto==false){
-            if(!trex.saltando){
+            if(!kanguro.saltando){
             saltar();
             }
          }
