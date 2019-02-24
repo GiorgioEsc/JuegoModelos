@@ -32,6 +32,11 @@ Esta magnifica aventura se podra jugar presionando la barra espaciadora del tecl
 
 Esto es lo mejor del juego, se podra ganar cuando logres hacer como puntaje la edad del universo. ¡Perfecto! ¿no lo crees?
 
+### Manejo del nombre y marcador:
+
+El nombre se guarda en la variable homonima "nombre", declarada en la linea 1 del código javascript.<br/>
+La variable que lleva la cuenta del marcador se encuentra dentro del objeto "nivel", el cual está declarado en la linea 8 del código javascript. 
+Para acceder a la variable marcador del objeto nivel use la sentencia "nivel.marcador".
 
 ##### ----------------------------------------------------------------------------------------------------------------------------------
 ### Presentado por:
