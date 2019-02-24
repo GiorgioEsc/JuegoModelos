@@ -1,5 +1,16 @@
-document.addEventListener("keydown",function(evento){
+var nombre;
+var imgKanguro, imgNube, imgPiedras, imgSuelo;
+var ancho = 700;
+var alto = 300;
+var canvas,ctx;
+var suelo=220;
+var kanguro = {y:220, vy:0, gravedad:2, salto:28, vymax:9, saltando: false };
+var nivel= {velocidad: 9, marcador: 0, muerto:false};
+var piedras= {x: ancho+100, y:suelo};
+var nube= {x:400, y: 100,velocidad:1};
+var nube2= {x:200, y: 100,velocidad:1};
 
+document.addEventListener("keydown",function(evento){
     if(evento.keyCode==32){
         console.log("Salta");
         if (nivel.muerto==false){
@@ -20,12 +31,7 @@ document.addEventListener("keydown",function(evento){
 
         }
     }
-
-
 });
-
-var nombre;
-var imgKanguro, imgNube, imgPiedras, imgSuelo;
 
 function cargaImagenes(){
     imgKanguro= new Image ();
@@ -40,11 +46,6 @@ function cargaImagenes(){
     imgPiedras.src = 'img/cactus.png'
     imgSuelo.src = 'img/suelo.png'
 }
-
-var ancho = 700;
-var alto = 300;
-var canvas,ctx;
-
 
 function inicializa(){
     canvas = document.getElementById('canvas');
@@ -67,27 +68,16 @@ function ingresarNombre(txt){
 function borraCanvas(){
     canvas.width=ancho;
     canvas.height=alto;
-
 }
-var suelo=220;
-var kanguro = {y:220, vy:0, gravedad:2, salto:28, vymax:9, saltando: false };
-var nivel= {velocidad: 9, marcador: 0, muerto:false};
-var piedras= {x: ancho+100, y:suelo};
-var nube= {x:400, y: 100,velocidad:1};
-var nube2= {x:200, y: 100,velocidad:1};
-
-
 
 function dibujaKanguro(){
     ctx.drawImage(imgKanguro,0,0,485,485,100,kanguro.y,80,80)
-
 }
-
 
 function dibujaPiedras(){
     ctx.drawImage(imgPiedras,0,0,517,517,piedras.x, piedras.y,38,75);
-
 }
+
 function logicaPiedras(){
     if (piedras.x <- 100){
         piedras.x = ancho+100;
@@ -95,19 +85,16 @@ function logicaPiedras(){
     else{
         piedras.x -= nivel.velocidad;
     }
-
 }
 
 function dibujaSuelo(){
     ctx.drawImage(imgSuelo,0,0,960,480,0, 30, 690,300 );
-
 }
-
 
 function dibujaNube(){
     ctx.drawImage(imgNube,0,0,485,485,nube.x, nube.y, 82,31 );
-
 }
+
 function logicaNube(){
     if (nube.x <- 100){
         nube.x = ancho+100;
@@ -115,12 +102,10 @@ function logicaNube(){
     else{
         nube.x -= nube.velocidad;
     }
-
 }
-/////////////////////////////////////////////////////////////////////
+
 function dibujaNube2(){
     ctx.drawImage(imgNube2,0,0,517,517,nube2.x, nube2.y, 82,31 );
-
 }
 function logicaNube2(){
     if (nube2.x <- 100){
@@ -129,7 +114,6 @@ function logicaNube2(){
     else{
         nube2.x -= nube2.velocidad;
     }
-
 }
 
 function saltar(){
@@ -139,33 +123,28 @@ function saltar(){
 
 function gravedad(){
     if(kanguro.saltando==true){
-
         if (kanguro.y-kanguro.vy-kanguro.gravedad > suelo){
             kanguro.saltando=false;
             kanguro.vy=0;
             kanguro.y=suelo;
         }
         else{
-        kanguro.vy -= kanguro.gravedad;
-        kanguro.y -= kanguro.vy;
-
+            kanguro.vy -= kanguro.gravedad;
+            kanguro.y -= kanguro.vy;
         }
     }
 }
 
-
 function colision(){
+    if (piedras.x >=100 && piedras.x<=180){
+        if(kanguro.y >= suelo-55){
+            nivel.muerto= true;
+            nivel.velocidad=0;
+            nube.velocidad=0;
+            nube2.velocidad=0;
 
-if (piedras.x >=100 && piedras.x<=180){
-    if(kanguro.y >= suelo-55){
-        nivel.muerto= true;
-        nivel.velocidad=0;
-        nube.velocidad=0;
-        nube2.velocidad=0;
-
+        }
     }
-}
-
 }
 
 function puntuacion(){
@@ -181,7 +160,6 @@ function puntuacion(){
     else{
         nivel.marcador++;
     }
-
 }
 
 
