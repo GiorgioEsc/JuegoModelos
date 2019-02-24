@@ -24,6 +24,7 @@ document.addEventListener("keydown",function(evento){
 
 });
 
+var nombre;
 var imgKanguro, imgNube, imgPiedras, imgSuelo;
 
 function cargaImagenes(){
@@ -48,8 +49,19 @@ var canvas,ctx;
 function inicializa(){
     canvas = document.getElementById('canvas');
     ctx = canvas.getContext('2d');
+    ingresarNombre("Ingrese su nombre");
     cargaImagenes();
+}
 
+function ingresarNombre(txt){
+    let aux = prompt(txt, "nombre");
+
+    if(aux == null || aux == ""){
+        ingresarNombre("nombre invalido, introduzca otro.")
+    }
+    else{
+        nombre = aux;
+    } 
 }
 
 function borraCanvas(){
@@ -79,7 +91,6 @@ function dibujaPiedras(){
 function logicaPiedras(){
     if (piedras.x <- 100){
         piedras.x = ancho+100;
-        nivel.marcador++;
     }
     else{
         piedras.x -= nivel.velocidad;
@@ -167,19 +178,22 @@ function puntuacion(){
         ctx.fillStyle = ('red');
         ctx.fillText('GAME OVER', 240,150);
     }
+    else{
+        nivel.marcador++;
+    }
 
 }
 
 
 //Bucle Principal 
-var FPS = 50;
+var FPS = 60;
 setInterval(function(){ //cada cuanto se debe ejecutar una funcion en un intervalo de tiempo.
     principal();
 }, 1000/FPS);
 
 
 //Esta es la funcion donde el juego va actualizar todo.
-function principal (){ 
+function principal (){
     borraCanvas();
     gravedad();
     colision();
